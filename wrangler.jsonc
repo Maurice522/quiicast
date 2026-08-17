@@ -1,0 +1,13 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "quiicast",
+	"compatibility_date": "2026-08-16",
+	// The site is only meant to be reachable at quiicast.com — disabling the
+	// workers.dev route stops it resolving at all, avoiding duplicate-content
+	// SEO issues from having the same site live at two different URLs.
+	"workers_dev": false,
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	}
+}

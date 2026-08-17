@@ -5,6 +5,12 @@ import QualitySelect from './QualitySelect';
 
 type Status = 'idle' | 'starting' | 'waiting' | 'connected' | 'ended' | 'error';
 
+// Render's free tier spins the backend down after inactivity, so the first
+// connection after a while can take 30-60s to wake it back up. Past this
+// threshold we show a hint explaining the delay instead of leaving people
+// wondering if it's broken.
+const SLOW_CONNECTION_HINT_DELAY_MS = 4000;
+
 interface PeerEntry {
   pc: RTCPeerConnection;
   videoSender: RTCRtpSender | null;
@@ -33,6 +39,7 @@ export default function CasterWidget() {
   const [receiverCount, setReceiverCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
+  const [slowConnection, setSlowConnection] = useState(false);
 
   const wsRef = useRef<WebSocket | null>(null);
   // A caster can have several simultaneous receivers, each its own peer
@@ -41,6 +48,13 @@ export default function CasterWidget() {
   const streamRef = useRef<MediaStream | null>(null);
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slowConnectionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearSlowConnectionTimer = useCallback(() => {
+    if (slowConnectionTimeoutRef.current) clearTimeout(slowConnectionTimeoutRef.current);
+    slowConnectionTimeoutRef.current = null;
+    setSlowConnection(false);
+  }, []);
 
   const cleanup = useCallback(() => {
     for (const { pc } of peersRef.current.values()) pc.close();
@@ -53,7 +67,8 @@ export default function CasterWidget() {
     if (localVideoRef.current) localVideoRef.current.srcObject = null;
     if (refreshTimeoutRef.current) clearTimeout(refreshTimeoutRef.current);
     refreshTimeoutRef.current = null;
-  }, []);
+    clearSlowConnectionTimer();
+  }, [clearSlowConnectionTimer]);
 
   useEffect(() => () => cleanup(), [cleanup]);
 
@@ -73,6 +88,7 @@ export default function CasterWidget() {
       case 'otp-created': {
         // Also fires on an auto-refresh after expiry — don't clobber
         // 'connected' if receivers are already on this session.
+        clearSlowConnectionTimer();
         setOtp(msg.otp);
         setExpiresInMinutes(msg.expiresInMinutes);
         setMaxReceivers(msg.maxReceivers);
@@ -174,10 +190,12 @@ export default function CasterWidget() {
 
       const ws = connectSignaling(handleServerMessage);
       wsRef.current = ws;
+      slowConnectionTimeoutRef.current = setTimeout(() => setSlowConnection(true), SLOW_CONNECTION_HINT_DELAY_MS);
       ws.addEventListener('open', () => {
         send(ws, { type: 'start-cast', mode });
       });
       ws.addEventListener('error', () => {
+        clearSlowConnectionTimer();
         setErrorMessage('Could not reach the QuiiCast server. Please try again.');
         setStatus('error');
       });
@@ -245,7 +263,14 @@ export default function CasterWidget() {
       {status === 'starting' && (
         <div className="flex flex-col items-center gap-3 py-10 text-center">
           <span className="h-8 w-8 animate-spin rounded-full border-2 border-brand-400 border-t-transparent" />
-          <p className="text-slate-600 dark:text-slate-400">Waiting for screen share permission…</p>
+          <p className="text-slate-600 dark:text-slate-400">
+            {slowConnection ? 'Connecting to the server…' : 'Waiting for screen share permission…'}
+          </p>
+          {slowConnection && (
+            <p className="max-w-xs text-xs text-slate-500">
+              We use free server hosting — please allow a few seconds while it wakes up.
+            </p>
+          )}
         </div>
       )}
 
