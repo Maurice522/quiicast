@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { connectSignaling, iceServersFor, send, type Mode, type ServerMessage } from '../lib/signaling';
+import { connectSignaling, getIceServers, send, type Mode, type ServerMessage } from '../lib/signaling';
 import type { Quality } from '../lib/quality';
 import QualitySelect from './QualitySelect';
 
@@ -24,6 +24,7 @@ export default function ReceiverWidget() {
 
   const wsRef = useRef<WebSocket | null>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
+  const pcReadyRef = useRef<Promise<void>>(Promise.resolve());
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const playerRef = useRef<HTMLDivElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -100,10 +101,15 @@ export default function ReceiverWidget() {
     switch (msg.type) {
       case 'joined': {
         clearSlowConnectionTimer();
-        setupPeerConnection(msg.mode);
+        pcReadyRef.current = setupPeerConnection(msg.mode);
+        await pcReadyRef.current;
         break;
       }
       case 'offer': {
+        // The offer can arrive before setupPeerConnection finishes (it now
+        // awaits a TURN-credentials fetch) — wait for the same promise so it
+        // isn't dropped on a fast round-trip from the caster.
+        await pcReadyRef.current;
         const pc = pcRef.current;
         const ws = wsRef.current;
         if (!pc || !ws) return;
@@ -114,6 +120,7 @@ export default function ReceiverWidget() {
         break;
       }
       case 'ice-candidate': {
+        await pcReadyRef.current;
         if (msg.candidate) {
           await pcRef.current?.addIceCandidate(msg.candidate).catch(() => {});
         }
@@ -133,11 +140,11 @@ export default function ReceiverWidget() {
     }
   }
 
-  function setupPeerConnection(mode: Mode) {
+  async function setupPeerConnection(mode: Mode) {
     const ws = wsRef.current;
     if (!ws) return;
 
-    const pc = new RTCPeerConnection({ iceServers: iceServersFor(mode) });
+    const pc = new RTCPeerConnection({ iceServers: await getIceServers(mode) });
     pcRef.current = pc;
 
     pc.onicecandidate = (event) => {

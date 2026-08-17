@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { connectSignaling, iceServersFor, send, type Mode, type ServerMessage } from '../lib/signaling';
+import { connectSignaling, getIceServers, send, type Mode, type ServerMessage } from '../lib/signaling';
 import { applyQualityToSender, videoConstraintsFor, type Quality } from '../lib/quality';
 import QualitySelect from './QualitySelect';
 
@@ -149,7 +149,7 @@ export default function CasterWidget() {
     const stream = streamRef.current;
     if (!ws || !stream) return;
 
-    const pc = new RTCPeerConnection({ iceServers: iceServersFor(mode) });
+    const pc = new RTCPeerConnection({ iceServers: await getIceServers(mode) });
     stream.getTracks().forEach((track) => pc.addTrack(track, stream));
 
     const videoTransceiver = pc.getTransceivers().find((t) => t.sender.track?.kind === 'video');

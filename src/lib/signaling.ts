@@ -24,11 +24,29 @@ export function getWsUrl(): string {
   return url;
 }
 
-// In LAN mode we deliberately omit STUN servers so ICE gathering only
+// In LAN mode we deliberately omit STUN/TURN servers so ICE gathering only
 // produces host (local network) candidates — media never leaves the LAN.
 // Signaling still needs the internet-reachable backend either way.
-export function iceServersFor(mode: Mode): RTCIceServer[] {
-  return mode === 'lan' ? [] : [{ urls: 'stun:stun.l.google.com:19302' }];
+//
+// In Internet mode, STUN alone isn't enough whenever either peer sits behind
+// a symmetric or carrier-grade NAT (common on mobile networks) — no direct
+// path can be found and media silently never flows. The backend hands out
+// short-lived Cloudflare TURN relay credentials as a fallback for that case.
+export async function getIceServers(mode: Mode): Promise<RTCIceServer[]> {
+  if (mode === 'lan') return [];
+
+  const stun: RTCIceServer = { urls: 'stun:stun.l.google.com:19302' };
+  try {
+    const apiBase = getWsUrl().replace(/^ws/, 'http');
+    const res = await fetch(`${apiBase}/api/turn-credentials`);
+    if (!res.ok) throw new Error(`TURN credentials request failed: ${res.status}`);
+    const data: { iceServers: RTCIceServer[] } = await res.json();
+    return [stun, ...data.iceServers];
+  } catch {
+    // Fall back to STUN-only rather than failing the whole connection —
+    // direct P2P still works for plenty of network pairings.
+    return [stun];
+  }
 }
 
 export function connectSignaling(onMessage: (msg: ServerMessage) => void): WebSocket {
