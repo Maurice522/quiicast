@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { faqs } from '../data/faqs';
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((faq) => ({
+		'@type': 'Question',
+		name: faq.question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: faq.answer
+		}
+	}))
+};
+---
+
+<BaseLayout
+	title="Screen Share FAQ — iPhone, TV, Roku, Zoom & More | QuiiCast"
+	description="Common screen sharing questions answered: iPhone, Android, TV, Roku, FaceTime, Zoom, Teams, Google Meet, Discord, and more."
+	path="/faq"
+	jsonLd={jsonLd}
+>
+	<div class="text-center">
+		<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+			Screen sharing questions, answered
+		</h1>
+		<p class="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-400">
+			Common questions about screen sharing — on QuiiCast, and on the apps you're probably already using.
+		</p>
+	</div>
+
+	<div class="mx-auto mt-12 max-w-2xl space-y-3">
+		{faqs.map((faq) => (
+			<details class="group glass-card overflow-hidden p-0">
+				<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-slate-900 dark:text-white [&::-webkit-details-marker]:hidden">
+					{faq.question}
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						class="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180"
+					>
+						<path d="m6 9 6 6 6-6" />
+					</svg>
+				</summary>
+				<p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+					{faq.answer}
+				</p>
+			</details>
+		))}
+	</div>
+
+	<div class="glass-card mx-auto mt-12 flex max-w-2xl flex-col items-center gap-5 p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+		<div>
+			<h2 class="text-lg font-semibold text-slate-900 dark:text-white">Still have a question?</h2>
+			<p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Read more about how QuiiCast works, or just try it.</p>
+		</div>
+		<div class="flex shrink-0 gap-3">
+			<a href="/how-it-works" class="btn-secondary">How it works</a>
+			<a href="/caster" class="btn-primary">Try it now</a>
+		</div>
+	</div>
+</BaseLayout>

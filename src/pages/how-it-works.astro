@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="How QuiiCast Works — Screen Share Without an Account"
+	description="Learn how to screen share online without installing anything. QuiiCast connects two browsers directly with a 4-digit code — here's how it works."
+	path="/how-it-works"
+>
+	<div class="text-center">
+		<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+			How to screen share online without installing anything
+		</h1>
+		<p class="mx-auto mt-4 max-w-xl text-slate-600 dark:text-slate-400">
+			QuiiCast is a screen sharing tool that runs entirely in your browser. There's nothing to
+			install and no account to create — just a 4-digit code that connects two browsers directly.
+		</p>
+	</div>
+
+	<div class="mt-14 space-y-5">
+		{[
+			{ n: '1', title: 'Start a cast', body: 'On the <a href="/caster" class="text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200">cast page</a>, click "start sharing." Your browser will ask for permission to share your screen, a window, or a tab — this permission prompt is a browser security requirement and can\'t be skipped. Once you allow it, QuiiCast generates a random 4-digit code.' },
+			{ n: '2', title: 'Share the code', body: 'Give that code to whoever you want to share your screen with — up to 5 people can join the same cast with it. It expires automatically after a few minutes.' },
+			{ n: '3', title: 'Connect as a receiver', body: 'Each person goes to the <a href="/receiver" class="text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200">receive page</a> and types in the code. As soon as it\'s validated, their browser negotiates its own direct, peer-to-peer video connection with yours — QuiiCast\'s server helps browsers find each other but never sees or touches the actual video stream.' }
+		].map((step) => (
+			<div class="glass-card flex gap-5 p-6">
+				<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-sm font-bold text-white shadow-lg shadow-brand-600/30">
+					{step.n}
+				</span>
+				<div>
+					<h2 class="font-semibold text-slate-900 dark:text-white">{step.title}</h2>
+					<p class="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400" set:html={step.body} />
+				</div>
+			</div>
+		))}
+	</div>
+
+	<div class="glass-card mt-8 p-6">
+		<h2 class="font-semibold text-slate-900 dark:text-white">Screen share on the same WiFi network</h2>
+		<p class="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+			If both devices are on the same WiFi network, turn on "Prefer local WiFi" before starting
+			your cast. This keeps the actual video traffic on your local network for lower latency —
+			QuiiCast still needs a brief moment of internet access to help the two browsers connect, but
+			the video itself never has to leave the network.
+		</p>
+	</div>
+
+	<div class="mt-10">
+		<h2 class="text-lg font-semibold text-slate-900 dark:text-white">Good to know</h2>
+		<ul class="mt-4 space-y-3">
+			{[
+				'No sign-up, no download, no browser extension.',
+				'Works in any modern desktop or mobile browser to receive a screen share.',
+				"iOS Safari can't share (cast) a screen due to Apple's platform restrictions, but it can receive one.",
+				'Up to 5 people can watch the same cast at once — built for small groups, not broadcasting to a large audience.'
+			].map((item) => (
+				<li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 h-4 w-4 shrink-0 text-brand-400">
+						<path d="M20 6 9 17l-5-5" />
+					</svg>
+					{item}
+				</li>
+			))}
+		</ul>
+	</div>
+</BaseLayout>

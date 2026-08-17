@@ -1,0 +1,167 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: Record<string, unknown>;
+  image?: string;
+}
+
+const { title, description, path, jsonLd, image = '/og-image.png' } = Astro.props;
+const canonicalUrl = new URL(path, Astro.site).toString();
+const ogImageUrl = new URL(image, Astro.site).toString();
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#4f46e5" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="QuiiCast" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="QuiiCast — free online screen sharing" />
+		<meta property="og:locale" content="en_US" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		{jsonLd && (
+			<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+		)}
+
+		<script is:inline>
+			// Runs before paint to avoid a flash of the wrong theme.
+			(function () {
+				var stored = localStorage.getItem('quiicast-theme');
+				var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var isDark = stored ? stored === 'dark' : prefersDark;
+				document.documentElement.classList.toggle('dark', isDark);
+			})();
+		</script>
+	</head>
+	<body class="relative min-h-screen overflow-x-hidden">
+		<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+			<div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-brand-400/20 blur-[120px] dark:bg-brand-600/30"></div>
+			<div class="absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-fuchsia-400/10 blur-[120px] dark:bg-fuchsia-600/20"></div>
+			<div class="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-brand-300/10 blur-[120px] dark:bg-brand-500/20"></div>
+		</div>
+
+		<header class="sticky top-0 z-50 border-b border-slate-200 bg-slate-50/70 backdrop-blur-xl dark:border-white/5 dark:bg-ink-950/70">
+			<div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
+				<a class="flex shrink-0 items-center gap-2 text-lg font-bold tracking-tight text-slate-900 dark:text-white" href="/">
+					<span class="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 text-sm text-white shadow-lg shadow-brand-600/40">Q</span>
+					QuiiCast
+				</a>
+
+				<nav class="hidden items-center gap-6 sm:flex">
+					<a href="/caster" class="nav-link">Cast</a>
+					<a href="/receiver" class="nav-link">Receive</a>
+					<a href="/how-it-works" class="nav-link">How it works</a>
+					<a href="/blog" class="nav-link">Blog</a>
+					<a href="/faq" class="nav-link">FAQ</a>
+					<details class="group relative">
+						<summary class="nav-link flex cursor-pointer list-none items-center gap-1 [&::-webkit-details-marker]:hidden">
+							Company
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3 transition-transform duration-200 group-open:rotate-180">
+								<path d="m6 9 6 6 6-6" />
+							</svg>
+						</summary>
+						<div class="absolute right-0 top-full z-50 mt-3 w-48 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl dark:border-white/10 dark:bg-ink-900">
+							<a href="/about" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">About Us</a>
+							<a href="/contact" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Contact Us</a>
+							<a href="/privacy-policy" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Privacy Policy</a>
+							<a href="/terms" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Terms &amp; Conditions</a>
+						</div>
+					</details>
+					<button type="button" aria-label="Toggle dark mode" class="theme-toggle icon-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden h-4 w-4 dark:block">
+							<circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 dark:hidden">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+						</svg>
+					</button>
+				</nav>
+
+				<div class="flex items-center gap-2 sm:hidden">
+					<button type="button" aria-label="Toggle dark mode" class="theme-toggle icon-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden h-4 w-4 dark:block">
+							<circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 dark:hidden">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+						</svg>
+					</button>
+
+					<details class="relative">
+						<summary
+							aria-label="Open menu"
+							class="icon-btn cursor-pointer list-none [&::-webkit-details-marker]:hidden"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+								<path d="M4 6h16M4 12h16M4 18h16" />
+							</svg>
+						</summary>
+						<div class="absolute right-0 top-12 z-50 w-48 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl dark:border-white/10 dark:bg-ink-900">
+							<a href="/caster" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Cast</a>
+							<a href="/receiver" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Receive</a>
+							<a href="/how-it-works" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">How it works</a>
+							<a href="/blog" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Blog</a>
+							<a href="/faq" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">FAQ</a>
+							<div class="my-1 border-t border-slate-200 dark:border-white/10"></div>
+							<a href="/about" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">About Us</a>
+							<a href="/contact" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Contact Us</a>
+							<a href="/privacy-policy" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Privacy Policy</a>
+							<a href="/terms" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Terms &amp; Conditions</a>
+						</div>
+					</details>
+				</div>
+			</div>
+		</header>
+
+		<script is:inline>
+			document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					var isDark = document.documentElement.classList.toggle('dark');
+					localStorage.setItem('quiicast-theme', isDark ? 'dark' : 'light');
+				});
+			});
+		</script>
+
+		<main class="mx-auto max-w-4xl px-5 pb-24 pt-14">
+			<slot />
+		</main>
+
+		<footer class="mx-auto max-w-4xl px-5 pb-10 text-sm text-slate-500 dark:text-slate-500">
+			<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-slate-200 pt-8 dark:border-white/10">
+				<a href="/about" class="hover:text-slate-900 dark:hover:text-white">About Us</a>
+				<a href="/contact" class="hover:text-slate-900 dark:hover:text-white">Contact Us</a>
+				<a href="/privacy-policy" class="hover:text-slate-900 dark:hover:text-white">Privacy Policy</a>
+				<a href="/terms" class="hover:text-slate-900 dark:hover:text-white">Terms &amp; Conditions</a>
+			</nav>
+			<p class="mt-6 text-center">QuiiCast — free online screen sharing, no sign-up.</p>
+		</footer>
+	</body>
+</html>

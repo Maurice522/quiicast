@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'QuiiCast',
+  url: 'https://quiicast.com',
+  applicationCategory: 'CommunicationApplication',
+  operatingSystem: 'Any',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD'
+  },
+  description:
+    'QuiiCast is a free screen share app for quick casting your screen to another device — no account, no download, just a 4-digit code.'
+};
+---
+
+<BaseLayout
+	title="Free Screen Share App | QuiiCast — No Sign-Up"
+	description="QuiiCast is a free screen share app for quick casting your screen — works on iPhone, Android, and TV. No sign-up, no download, just a 4-digit code."
+	path="/"
+	jsonLd={jsonLd}
+>
+	<div class="text-center">
+		<span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-medium text-brand-600 dark:border-white/10 dark:bg-white/5 dark:text-brand-300">
+			<span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+			No sign-up · No download · 100% free
+		</span>
+
+		<h1 class="mt-6 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-6xl dark:from-white dark:via-white dark:to-slate-400">
+			The Fastest Way<br class="hidden sm:block" /> to Screen Share Online
+		</h1>
+
+		<p class="mx-auto mt-6 max-w-xl text-lg text-slate-600 dark:text-slate-400">
+			QuiiCast lets you cast your screen to any device straight from the browser. Start sharing
+			and get a 4-digit code, or enter one to instantly view someone else's screen.
+		</p>
+	</div>
+
+	<div class="mt-12 grid gap-5 sm:grid-cols-2">
+		<a class="glass-card group relative overflow-hidden p-7 transition-transform duration-300 hover:-translate-y-1" href="/caster">
+			<div class="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-brand-500/20 blur-2xl transition-opacity duration-300 group-hover:opacity-100 opacity-0"></div>
+			<span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-500/15 text-brand-300">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+			</span>
+			<h2 class="mt-4 text-lg font-semibold text-slate-900 dark:text-white">Cast your screen</h2>
+			<p class="mt-1.5 text-sm text-slate-600 dark:text-slate-400">Share your screen and get a 4-digit code to give to a receiver.</p>
+			<span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-300 transition-transform group-hover:translate-x-1">
+				Start casting →
+			</span>
+		</a>
+		<a class="glass-card group relative overflow-hidden p-7 transition-transform duration-300 hover:-translate-y-1" href="/receiver">
+			<div class="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-fuchsia-500/20 blur-2xl transition-opacity duration-300 group-hover:opacity-100 opacity-0"></div>
+			<span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-fuchsia-500/15 text-fuchsia-300">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+			</span>
+			<h2 class="mt-4 text-lg font-semibold text-slate-900 dark:text-white">Receive a screen share</h2>
+			<p class="mt-1.5 text-sm text-slate-600 dark:text-slate-400">Enter a 4-digit code to instantly view someone else's screen.</p>
+			<span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-fuchsia-300 transition-transform group-hover:translate-x-1">
+				Enter a code →
+			</span>
+		</a>
+	</div>
+
+	<p class="mt-12 text-center text-sm text-slate-500 dark:text-slate-500">
+		Works entirely in the browser over a direct peer-to-peer connection. Prefer a local WiFi
+		connection for lower latency, or use the default internet mode to connect from anywhere.
+		Read more about <a href="/how-it-works" class="text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200">how QuiiCast works</a>,
+		browse the <a href="/blog" class="text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200">blog</a> for ideas on how to use it,
+		or check the <a href="/faq" class="text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300 dark:hover:text-brand-200">FAQ</a> for quick answers.
+	</p>
+
+	<section class="prose mx-auto mt-20 max-w-2xl">
+		<h2>What is QuiiCast?</h2>
+		<p>
+			QuiiCast is a free screen share app that runs entirely in your browser. There's nothing to
+			install and no account to create — open the site, click start, and get a 4-digit code you
+			can hand to anyone you want to share your screen with. It's built for the moment you need
+			someone to see your screen right now, not fifteen minutes from now after a download
+			finishes and an account gets created.
+		</p>
+		<p>
+			Most screen sharing features are bolted onto a bigger video-conferencing platform, alongside
+			calendars, waiting rooms, and camera prompts you don't need for a quick screen share.
+			QuiiCast does one thing: it lets you quick cast your screen to another device, in real time,
+			over a direct peer-to-peer connection, with nothing in between except a short code.
+		</p>
+
+		<h2>A quick share app built for speed</h2>
+		<p>
+			The idea behind QuiiCast is that screen sharing shouldn't need a scheduled meeting. Open the
+			<a href="/caster">cast page</a>, share your screen, and read the code out loud, drop it in a
+			chat, or text it over. Whoever's receiving types it into the <a href="/receiver">receive
+			page</a> and is watching within seconds — that's the entire quick cast flow, start to
+			finish, and up to five people can join the same code at once.
+		</p>
+		<p>
+			Because there's no sign-up, there's no account for anyone to forget the password to, and no
+			app they need to have already installed. If they have a browser, they can watch — and if a
+			code isn't used, it expires on its own after a few minutes, so nothing is left running once
+			you're done.
+		</p>
+
+		<h2>Screen share on iPhone, Android, and any browser</h2>
+		<p>
+			QuiiCast works across devices without a native app to install. On Android, you can both cast
+			and receive a screen share directly from Chrome or any modern mobile browser. On iPhone,
+			Apple's own platform restrictions mean Safari can't capture the screen to cast it out —
+			that's a limitation of iOS itself, not QuiiCast — but an iPhone can receive a screen share
+			from someone else without any trouble at all. So whether you're on an iPhone watching
+			someone else's screen, or on Android doing either side of the connection, QuiiCast works the
+			same way it does on desktop: a code, and a connection.
+		</p>
+
+		<h2>Cast your screen to a TV</h2>
+		<p>
+			If your TV has its own browser — most modern smart TVs do — you can screen cast to a TV the
+			same way you'd share to any other device: open the receive page on the TV, type in the code
+			shown on your laptop, and your screen appears on the bigger display. Turning on "Prefer
+			local WiFi" before you start keeps the video on your home network instead of routing it over
+			the internet, which usually means less delay when the TV and your laptop are a few feet
+			apart. Read more about
+			<a href="/blog/casting-to-a-tv-on-same-wifi">casting to a TV on the same WiFi</a>.
+		</p>
+		<p>
+			Devices like Roku are a different case worth knowing about: Roku's operating system doesn't
+			include a general-purpose web browser, so there's no way to open a receive page directly on
+			a Roku itself. If you're specifically trying to
+			<a href="/blog/how-to-screen-cast-to-roku">screen cast to Roku</a>, a smart TV with its own
+			browser — or a laptop connected to the TV by cable — will get you further than trying to
+			load a website directly on the Roku.
+		</p>
+
+		<h2>A lighter alternative to screen recorders</h2>
+		<p>
+			Tools like Screencast-O-Matic are built around recording — capturing a video file you can
+			edit and publish later. QuiiCast isn't a recorder. There's no video file, no export step,
+			and nothing saved anywhere once the session ends. If what you actually need is for someone
+			to see your screen right now, a recording tool is more setup than the moment calls for.
+			QuiiCast is built specifically for that instant, live case — screen sharing, not screen
+			recording.
+		</p>
+	</section>
+</BaseLayout>

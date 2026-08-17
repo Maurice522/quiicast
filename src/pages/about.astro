@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="About QuiiCast"
+	description="QuiiCast is a free, browser-based screen sharing tool built to remove the friction of scheduling a meeting just to show someone your screen."
+	path="/about"
+>
+	<div class="text-center">
+		<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+			About QuiiCast
+		</h1>
+		<p class="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-400">
+			A small tool built around one idea: sharing your screen shouldn't require a meeting.
+		</p>
+	</div>
+
+	<div class="prose mx-auto mt-14 max-w-2xl">
+		<h2>Why QuiiCast exists</h2>
+		<p>
+			Most screen sharing lives inside something bigger — a video call, a meeting platform, a
+			support suite — with a login, a calendar, and a handful of steps between "I need to show you
+			my screen" and actually doing it. QuiiCast strips that down to the two things that actually
+			matter: a screen, and a code.
+		</p>
+
+		<h2>How it works, briefly</h2>
+		<p>
+			A caster shares their screen and gets a 4-digit code. A receiver types that code in and
+			watches, live, over a direct peer-to-peer connection. QuiiCast's server helps the two
+			browsers find each other — it never sees or stores the video itself. No account, no
+			download, and nothing left behind once the session ends. The full breakdown is on the
+			<a href="/how-it-works">how it works</a> page.
+		</p>
+
+		<h2>What it's for</h2>
+		<p>
+			QuiiCast is built for the moment-to-moment cases: helping a family member fix something on
+			their computer, pairing on a bug with a teammate, showing a client work in progress, casting
+			a laptop to a TV on the same WiFi. It's not trying to replace video-conferencing platforms
+			or screen recorders — it's for the times a full meeting is more setup than the moment calls
+			for. There are more <a href="/blog">real examples on the blog</a>.
+		</p>
+
+		<h2>What it isn't</h2>
+		<p>
+			QuiiCast doesn't record anything, doesn't require sign-up, and isn't built for broadcasting
+			to a large audience — a caster can reasonably support a handful of simultaneous viewers
+			before their own upload bandwidth becomes the limit. It's a tool for one person showing
+			their screen to a few others, quickly.
+		</p>
+	</div>
+
+	<div class="glass-card mx-auto mt-14 flex max-w-2xl flex-col items-center gap-5 p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+		<div>
+			<h2 class="text-lg font-semibold text-slate-900 dark:text-white">Questions?</h2>
+			<p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Check the FAQ, or get in touch directly.</p>
+		</div>
+		<div class="flex shrink-0 gap-3">
+			<a href="/faq" class="btn-secondary">FAQ</a>
+			<a href="/contact" class="btn-primary">Contact us</a>
+		</div>
+	</div>
+</BaseLayout>
