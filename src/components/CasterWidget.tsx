@@ -29,6 +29,25 @@ function preferH264(transceiver: RTCRtpTransceiver) {
   transceiver.setCodecPreferences([...h264, ...rest]);
 }
 
+// getDisplayMedia() rejects for several distinct reasons — a bare catch-all
+// message ("permission denied or cancelled") is misleading when the real
+// cause is that the browser/device doesn't support screen capture at all,
+// which is common on mobile and easy to mistake for user error.
+function getShareErrorMessage(err: unknown): string {
+  const name = err instanceof DOMException ? err.name : '';
+  switch (name) {
+    case 'NotAllowedError':
+      return 'Screen share permission was denied. On Android, check that Chrome has "Screen recording" permission in your phone\'s app settings, then try again.';
+    case 'AbortError':
+      return 'Screen share was closed before it started. Try again.';
+    case 'NotFoundError':
+    case 'NotReadableError':
+      return 'This device could not start screen capture. Try updating Chrome, or share from a desktop browser instead.';
+    default:
+      return 'Screen sharing isn\'t supported on this browser/device. Try the latest Chrome on Android, or share from a desktop browser.';
+  }
+}
+
 export default function CasterWidget() {
   const [status, setStatus] = useState<Status>('idle');
   const [mode, setMode] = useState<Mode>('internet');
@@ -40,6 +59,7 @@ export default function CasterWidget() {
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
   const [slowConnection, setSlowConnection] = useState(false);
+  const [permissionBlocked, setPermissionBlocked] = useState(false);
 
   const wsRef = useRef<WebSocket | null>(null);
   // A caster can have several simultaneous receivers, each its own peer
@@ -71,6 +91,35 @@ export default function CasterWidget() {
   }, [clearSlowConnectionTimer]);
 
   useEffect(() => () => cleanup(), [cleanup]);
+
+  // 'display-capture' isn't a standardized permission name — only some
+  // Chromium browsers expose it via the Permissions API, and querying it
+  // throws on browsers that don't. When it IS available and already denied,
+  // surface that up front instead of letting the user hit a confusing
+  // repeated failure: once Chrome remembers a "block" decision for a site,
+  // it stops showing the native picker entirely, so retrying the button does
+  // nothing until the permission is reset in the browser itself.
+  useEffect(() => {
+    let status: PermissionStatus | undefined;
+    let cancelled = false;
+
+    navigator.permissions
+      ?.query({ name: 'display-capture' as PermissionName })
+      .then((result) => {
+        if (cancelled) return;
+        status = result;
+        setPermissionBlocked(result.state === 'denied');
+        result.onchange = () => setPermissionBlocked(result.state === 'denied');
+      })
+      .catch(() => {
+        // Not supported in this browser — nothing to show proactively.
+      });
+
+    return () => {
+      cancelled = true;
+      if (status) status.onchange = null;
+    };
+  }, []);
 
   // The self-preview <video> only mounts once status is 'waiting'/'connected',
   // which happens after an async round-trip to the server — well after the
@@ -170,6 +219,15 @@ export default function CasterWidget() {
 
   async function startSharing() {
     setErrorMessage('');
+
+    if (!navigator.mediaDevices?.getDisplayMedia) {
+      setErrorMessage(
+        "This browser doesn't support screen sharing. On mobile, try the latest Chrome on Android — iOS browsers don't expose screen capture to websites at all."
+      );
+      setStatus('idle');
+      return;
+    }
+
     setStatus('starting');
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -199,8 +257,8 @@ export default function CasterWidget() {
         setErrorMessage('Could not reach the QuiiCast server. Please try again.');
         setStatus('error');
       });
-    } catch {
-      setErrorMessage('Screen share permission was denied or cancelled.');
+    } catch (err) {
+      setErrorMessage(getShareErrorMessage(err));
       setStatus('idle');
     }
   }
@@ -252,6 +310,17 @@ export default function CasterWidget() {
             <span className="text-left text-sm text-slate-700 dark:text-slate-300">Quality</span>
             <QualitySelect value={quality} onChange={setQuality} />
           </div>
+
+          {permissionBlocked && (
+            <div className="mt-3 w-full rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-left text-sm text-amber-800 dark:text-amber-300">
+              <p className="font-medium">Screen sharing is blocked for this site</p>
+              <p className="mt-1 text-xs text-amber-700/90 dark:text-amber-300/80">
+                Your browser remembers a previous "Block" choice, so it won't show the permission prompt again until
+                you reset it: tap the lock/info icon next to the address bar → Permissions (or Site settings) → allow
+                screen recording/camera → reload this page.
+              </p>
+            </div>
+          )}
 
           <button onClick={startSharing} className="btn-primary mt-6 w-full">
             Start sharing my screen
