@@ -17,4 +17,53 @@ import ReceiverWidget from '../components/ReceiverWidget.tsx';
 	<div class="mx-auto mt-10 max-w-lg">
 		<ReceiverWidget client:load />
 	</div>
+
+	<section class="prose mx-auto mt-20 max-w-2xl">
+		<h2>How receiving a screen share works</h2>
+		<p>
+			Whoever is sharing their screen starts from the <a href="/caster">cast page</a> and gets a
+			random 4-digit code. Type that code into the box above and click <strong>Connect</strong> — your
+			browser opens a direct, peer-to-peer connection to theirs and their screen appears on yours
+			within a second or two. There's no account to create and nothing to install; if your browser
+			can load this page, it can receive a screen share.
+		</p>
+		<p>
+			Once connected, use the player controls to mute or unmute audio, pause the picture, go full
+			screen, or adjust quality on your end independently of what the caster picked — useful if
+			you're on a slower connection than they are. Up to 5 people can watch the same code at once,
+			so a study group, a small meeting, or a family member walking through a problem can all join
+			from the same 4-digit code.
+		</p>
+
+		<h2>If it's not connecting</h2>
+		<p>
+			Double-check the code is current — codes expire after a short period of inactivity and
+			automatically refresh, so if the caster's session has been running a while, ask them to read
+			out the latest code shown on their screen. A black screen that never loads usually means the
+			two devices couldn't find a direct path to each other, which is more common on strict
+			corporate networks or mobile carrier connections — trying again after a few seconds, or asking
+			the caster to switch off "Prefer local WiFi" if you're on different networks, usually resolves it.
+		</p>
+
+		<h2>FAQ</h2>
+		<p>
+			<strong>Do I need to sign up to watch?</strong><br />
+			No — receiving a screen share never requires an account, a download, or a browser extension.
+		</p>
+		<p>
+			<strong>Can I watch on my phone?</strong><br />
+			Yes — the receive page works in any modern mobile browser on iPhone or Android. Watching a
+			screen share works on iOS even though iPhones can't be the one <em>sending</em> a share, due to
+			a restriction Apple applies at the OS level.
+		</p>
+		<p>
+			<strong>Can the person sharing see anything on my device?</strong><br />
+			No — the connection is one-way. You're watching their screen; they have no visibility into
+			yours at all.
+		</p>
+		<p>
+			See the <a href="/caster">cast page</a> if you're the one who needs to share instead of watch,
+			or check the full <a href="/faq">FAQ</a> for more questions.
+		</p>
+	</section>
 </BaseLayout>

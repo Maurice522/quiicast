@@ -18,4 +18,57 @@ import CasterWidget from '../components/CasterWidget.tsx';
 	<div class="mx-auto mt-10 max-w-lg">
 		<CasterWidget client:load />
 	</div>
+
+	<section class="prose mx-auto mt-20 max-w-2xl">
+		<h2>How casting your screen works</h2>
+		<p>
+			QuiiCast turns your browser tab into a screen-sharing sender. Click <strong>Start sharing my
+			screen</strong> above, and your browser will ask which screen, window, or tab to share — pick
+			whichever keeps anything private out of view. Once you confirm, QuiiCast generates a random
+			4-digit code and shows you a live preview of exactly what your viewers will see.
+		</p>
+		<p>
+			Send that code to anyone you want watching — over text, chat, email, or read out loud on a
+			call. They enter it on the <a href="/receiver">receive page</a> and connect directly to your
+			browser over a peer-to-peer WebRTC connection; the video never passes through QuiiCast's own
+			servers. Up to 5 people can join the same code at once, and the code automatically refreshes
+			if it sits unused long enough to expire, so a long session doesn't get interrupted.
+		</p>
+
+		<h2>Getting a better connection</h2>
+		<p>
+			If everyone watching is on the same WiFi network as you — the same office, the same house —
+			turn on <strong>Prefer local WiFi</strong> before you start sharing. It keeps the actual video
+			traffic on your local network instead of routing it over the internet, which usually means
+			lower latency and a smoother picture. Leave it off (the default) when anyone watching is on a
+			different network, since it can't find a path between two networks on its own.
+		</p>
+		<p>
+			The <strong>Quality</strong> selector controls resolution and frame rate. Auto adapts to your
+			connection automatically; for anything with fast motion (games, video), a higher frame-rate
+			preset matters more than resolution. For mostly-static content like a document or terminal, a
+			lower preset looks just as sharp and is easier on a slow connection.
+		</p>
+
+		<h2>FAQ</h2>
+		<p>
+			<strong>Does the viewer need an account or an app?</strong><br />
+			No — they just need a browser and the 4-digit code. There's nothing to install on either side.
+		</p>
+		<p>
+			<strong>Can I share just one window instead of my whole screen?</strong><br />
+			Yes — when your browser's share picker appears, choose a specific window or tab rather than
+			"Entire Screen" to keep everything else on your desktop private.
+		</p>
+		<p>
+			<strong>Why does it say screen sharing isn't supported?</strong><br />
+			This usually means the browser or device doesn't expose screen capture to websites — notably
+			iOS Safari and other iPhone browsers, which Apple restricts at the OS level. Android Chrome and
+			any desktop browser support it.
+		</p>
+		<p>
+			Read more on the <a href="/how-it-works">how it works</a> page, or check the full
+			<a href="/faq">FAQ</a> for questions about receiving a share instead of sending one.
+		</p>
+	</section>
 </BaseLayout>
