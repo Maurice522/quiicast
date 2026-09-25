@@ -61,5 +61,10 @@ export const faqs: Faq[] = [
     question: 'How do I screen share Netflix on Discord?',
     answer:
       "In most cases, you can't — Netflix and other streaming services use DRM copy protection that deliberately blocks screen capture, so the shared video shows up black regardless of what tool you're using. This isn't a Discord-specific bug; it happens with QuiiCast and every other screen-sharing tool too, because the restriction is enforced by the browser and operating system, not the app doing the sharing."
+  },
+  {
+    question: 'Is QuiiCast secure?',
+    answer:
+      "The video travels directly between the two browsers over an encrypted peer-to-peer WebRTC connection and never passes through QuiiCast's servers. Session codes expire quickly and code-guessing attempts are rate limited server-side. See the Security & Privacy page for the full breakdown, including what to avoid sharing."
   }
 ];

@@ -12,6 +12,12 @@ interface Props {
 const { title, description, path, jsonLd, image = '/og-image.png' } = Astro.props;
 const canonicalUrl = new URL(path, Astro.site).toString();
 const ogImageUrl = new URL(image, Astro.site).toString();
+
+// AdSense policy doesn't allow ads on screens without substantial publisher
+// content — /caster and /receiver are live tool screens (an active share/
+// watch session), not content pages, so ads are kept off them entirely
+// rather than relying on Auto ads to place them sensibly on its own.
+const isToolScreen = path === '/caster' || path === '/receiver';
 ---
 
 <html lang="en">
@@ -27,8 +33,10 @@ const ogImageUrl = new URL(image, Astro.site).toString();
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 
-		<!-- Google AdSense -->
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7283129222281584" crossorigin="anonymous"></script>
+		<!-- Google AdSense (skipped on live tool screens — see isToolScreen above) -->
+		{!isToolScreen && (
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7283129222281584" crossorigin="anonymous"></script>
+		)}
 
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZCPD00T2R"></script>
@@ -102,6 +110,7 @@ const ogImageUrl = new URL(image, Astro.site).toString();
 						</summary>
 						<div class="absolute right-0 top-full z-50 mt-3 w-48 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl dark:border-white/10 dark:bg-ink-900">
 							<a href="/about" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">About Us</a>
+							<a href="/security" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Security &amp; Privacy</a>
 							<a href="/contact" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Contact Us</a>
 							<a href="/privacy-policy" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Privacy Policy</a>
 							<a href="/terms" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Terms &amp; Conditions</a>
@@ -144,6 +153,7 @@ const ogImageUrl = new URL(image, Astro.site).toString();
 							<a href="/faq" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">FAQ</a>
 							<div class="my-1 border-t border-slate-200 dark:border-white/10"></div>
 							<a href="/about" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">About Us</a>
+							<a href="/security" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Security &amp; Privacy</a>
 							<a href="/contact" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Contact Us</a>
 							<a href="/privacy-policy" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Privacy Policy</a>
 							<a href="/terms" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10">Terms &amp; Conditions</a>
@@ -169,6 +179,7 @@ const ogImageUrl = new URL(image, Astro.site).toString();
 		<footer class="mx-auto max-w-4xl px-5 pb-10 text-sm text-slate-500 dark:text-slate-500">
 			<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-slate-200 pt-8 dark:border-white/10">
 				<a href="/about" class="hover:text-slate-900 dark:hover:text-white">About Us</a>
+				<a href="/security" class="hover:text-slate-900 dark:hover:text-white">Security &amp; Privacy</a>
 				<a href="/contact" class="hover:text-slate-900 dark:hover:text-white">Contact Us</a>
 				<a href="/privacy-policy" class="hover:text-slate-900 dark:hover:text-white">Privacy Policy</a>
 				<a href="/terms" class="hover:text-slate-900 dark:hover:text-white">Terms &amp; Conditions</a>

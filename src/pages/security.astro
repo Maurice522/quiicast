@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Security & Privacy — How QuiiCast Protects a Session"
+	description="How QuiiCast's peer-to-peer connection, 4-digit codes, and rate limiting actually work — and what to keep in mind before sharing anything sensitive."
+	path="/security"
+>
+	<div class="text-center">
+		<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+			Security & Privacy
+		</h1>
+		<p class="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-400">
+			A tool that shows someone your screen deserves a straight answer about how a session is protected.
+			Here's exactly how it works.
+		</p>
+	</div>
+
+	<div class="prose mx-auto mt-14 max-w-2xl">
+		<h2>The connection itself</h2>
+		<p>
+			QuiiCast is built on WebRTC, the same browser technology behind most video calling. Once two
+			browsers connect, video and audio travel directly between them — peer-to-peer — encrypted in
+			transit using DTLS and SRTP, the standard WebRTC encryption protocols. QuiiCast's server helps
+			the two browsers find each other (this is called signaling: looking up a code, exchanging
+			connection details) but the video stream itself never passes through it, and is never visible
+			to QuiiCast at any point. There's no recording, no storage, and no way for anyone but the
+			people actually connected to see the stream.
+		</p>
+
+		<h2>How the 4-digit code is protected</h2>
+		<p>
+			A 4-digit code has 10,000 possible combinations, which sounds thin on its own — the actual
+			protection comes from three things working together, not the code length alone:
+		</p>
+		<ul>
+			<li><strong>Short lifetime.</strong> A code is valid for a limited window (10 minutes by default) and refreshes automatically if the caster keeps sharing past that point, so an old code left in a chat log stops working on its own.</li>
+			<li><strong>Rate limiting on guesses.</strong> Attempts to join with a code are capped at 20 per IP address every 5 minutes on the server side. Beyond that, further attempts are rejected outright — a script trying to brute-force the full code space would take far longer than any code stays valid.</li>
+			<li><strong>Nothing to gain from guessing right.</strong> Joining a session gets you view access to whatever's currently being shared — there's no account, no stored data, and no persistent access beyond that single live session.</li>
+		</ul>
+		<p>
+			The caster can also see how many receivers are currently connected, and stopping the share
+			ends every connection immediately, for everyone.
+		</p>
+
+		<h2>What QuiiCast can't do</h2>
+		<p>
+			QuiiCast is intentionally view-only. There's no remote control, no keystroke access, and no way
+			for a receiver to interact with the caster's machine beyond watching and, if enabled, listening.
+			If a use case genuinely requires someone else to click or type on your machine, QuiiCast is the
+			wrong tool — a proper remote-support tool with its own consent flow is the right one.
+		</p>
+
+		<h2>Sharing something safely</h2>
+		<ul>
+			<li>Close anything you wouldn't want a viewer to see — other tabs, notifications, messaging apps — before you start, or share a single window instead of your full screen if your browser's picker offers it.</li>
+			<li>Never share a screen while entering a password, a two-factor code, or banking details. Pause or stop sharing first.</li>
+			<li>Only send a session code to someone you actually intend to share with — anyone with the code and a browser can join until it expires.</li>
+			<li>Stop sharing as soon as you're done. It also happens automatically if you close the tab.</li>
+		</ul>
+
+		<h2>Third-party infrastructure</h2>
+		<p>
+			QuiiCast's signaling server and database run on standard cloud infrastructure providers, which
+			may keep their own operational logs as part of running that infrastructure, separate from
+			anything QuiiCast itself collects. Full detail on data handling, analytics, and advertising is
+			in the <a href="/privacy-policy">privacy policy</a>.
+		</p>
+	</div>
+
+	<div class="glass-card mx-auto mt-14 flex max-w-2xl flex-col items-center gap-5 p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+		<div>
+			<h2 class="text-lg font-semibold text-slate-900 dark:text-white">More questions?</h2>
+			<p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Check the FAQ, or see how a session actually connects.</p>
+		</div>
+		<div class="flex shrink-0 gap-3">
+			<a href="/faq" class="btn-secondary">FAQ</a>
+			<a href="/how-it-works" class="btn-primary">How it works</a>
+		</div>
+	</div>
+</BaseLayout>
