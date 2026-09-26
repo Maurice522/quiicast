@@ -2,6 +2,7 @@
 title: "Screen Sharing for Tutoring and Study Groups"
 description: "A tutor showing one student a worked problem, or a study group looking at the same notes the night before an exam — without either side signing up for classroom software."
 publishDate: 2026-09-25
+updatedDate: 2026-09-26
 image: "/blog/live-tutoring-and-online-classes.svg"
 imageAlt: "Two connected screens with a graduation cap representing an online tutoring or study session"
 tags: ["education", "students"]

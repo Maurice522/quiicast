@@ -2,6 +2,7 @@
 title: "Screen Sharing for Developers: Pairing and Technical Interviews"
 description: "A lighter way to pair on a bug than opening a full call, and a way to watch a candidate work in their own editor instead of a stripped-down browser sandbox."
 publishDate: 2026-09-25
+updatedDate: 2026-09-26
 image: "/blog/pair-programming-screen-share.svg"
 imageAlt: "Two connected screens with code brackets representing pair programming or a technical interview"
 tags: ["developers", "hiring", "teams"]

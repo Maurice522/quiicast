@@ -2,6 +2,7 @@
 title: "Screen Sharing at Work: Demos, Documents, Client Updates, and Small Rooms"
 description: "For the work conversations that happen between meetings — a quick demo, a document walkthrough, a client check-in, a small-room presentation — and when a real video call is still the better call."
 publishDate: 2026-09-25
+updatedDate: 2026-09-26
 image: "/blog/freelancer-client-screen-share.svg"
 imageAlt: "Two connected screens with a briefcase icon representing sharing your screen at work"
 tags: ["work", "sales", "freelance", "meetings"]

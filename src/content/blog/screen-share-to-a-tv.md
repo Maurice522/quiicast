@@ -2,6 +2,7 @@
 title: "Screen Sharing to a TV: Same-WiFi Casting, the Roku Exception, and Watching Together Remotely"
 description: "Getting a laptop screen onto a bigger display, the honest reason Roku can't do it directly, and watching something with someone who isn't in the room — including when AirPlay or Chromecast is just the better choice."
 publishDate: 2026-09-25
+updatedDate: 2026-09-26
 image: "/blog/casting-to-a-tv-on-same-wifi.svg"
 imageAlt: "Two connected screens with a television icon representing casting to a TV"
 tags: ["home", "TV", "LAN mode"]

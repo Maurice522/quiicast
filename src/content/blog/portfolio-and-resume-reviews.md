@@ -2,6 +2,7 @@
 title: "Getting Real-Time Feedback on a Portfolio or Resume"
 description: "Scrolling through your own work with a mentor watching and reacting, instead of trading PDF comments."
 publishDate: 2026-08-05
+updatedDate: 2026-09-26
 image: "/blog/portfolio-and-resume-reviews.svg"
 imageAlt: "Two connected screens with a briefcase icon representing a portfolio review session"
 tags: ["career"]

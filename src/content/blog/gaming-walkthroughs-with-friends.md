@@ -2,6 +2,7 @@
 title: "Showing a Friend How to Beat a Level, Live"
 description: "For the games where a video walkthrough isn't as useful as someone actually watching you try, right now."
 publishDate: 2026-08-06
+updatedDate: 2026-09-26
 image: "/blog/gaming-walkthroughs-with-friends.svg"
 imageAlt: "Two connected screens with a game controller representing a gaming session"
 tags: ["gaming"]
