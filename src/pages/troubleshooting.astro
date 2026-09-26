@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Troubleshooting QuiiCast — Black Screen, Permissions, Slow Connect"
+	description="Real fixes for real issues we've diagnosed in QuiiCast: black screen on a different network, blocked screen-share permission, slow first connection, and browser support."
+	path="/troubleshooting"
+>
+	<div class="text-center">
+		<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+			Troubleshooting
+		</h1>
+		<p class="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-400">
+			The issues below are ones we've actually diagnosed and fixed, not a generic FAQ — each one
+			explains what's really happening.
+		</p>
+	</div>
+
+	<div class="prose mx-auto mt-14 max-w-2xl">
+		<h2>Receiver shows a black screen that never loads</h2>
+		<p>
+			This almost always means the two browsers couldn't find a direct path to each other — most
+			commonly because one side is behind a symmetric or carrier-grade NAT, which is common on
+			mobile data networks and some corporate WiFi. Signaling completes fine (the code is accepted,
+			"joined" fires), but the actual video connection never establishes.
+		</p>
+		<p>
+			<strong>The fix we shipped:</strong> QuiiCast now requests short-lived TURN relay credentials
+			from Cloudflare's network as a fallback whenever a direct peer-to-peer path can't be found, in
+			addition to STUN. If you still see a black screen after this fix, try disabling <strong>Prefer
+			local WiFi</strong> if the caster and receiver are actually on different networks — that
+			setting deliberately blocks the relay fallback to guarantee traffic never leaves your LAN,
+			which only works when both sides are genuinely local.
+		</p>
+
+		<h2>"Screen sharing isn't supported" or the permission prompt never appears</h2>
+		<p>
+			Two different causes produce a similar-looking failure. First: the browser itself may not
+			expose screen capture to websites at all — this is true of every browser on iOS (Safari,
+			Chrome-for-iOS, and others), since Apple doesn't implement the underlying Web API
+			(<code>getDisplayMedia</code>) on iOS at the OS level. No website, QuiiCast included, can work
+			around that from the browser side.
+		</p>
+		<p>
+			Second: on Android or desktop, the browser may have a stored "Block" decision for
+			screen-sharing on this specific site from an earlier visit. Once a browser remembers that
+			choice, it stops showing the native permission picker at all — clicking the button again does
+			nothing. Chrome's own site permissions (tap the lock/info icon next to the address bar) is
+			where that gets reset; no code on our end can force the picker back open once a browser has
+			decided to block it, by design.
+		</p>
+
+		<h2>The first connection takes 20-60 seconds</h2>
+		<p>
+			QuiiCast's backend runs on a free-tier host that spins the server down after a period of
+			inactivity to stay free. The first request after it's been idle has to wait for it to wake up
+			— we show a "waking up the server" message past a few seconds specifically so this doesn't
+			look like the app is broken. Every request after that first one is fast again until the
+			backend goes idle once more.
+		</p>
+
+		<h2>"Invalid or expired code"</h2>
+		<p>
+			Codes are valid for a limited window and auto-refresh on the caster's side while they keep
+			sharing, so a session running longer than the window gets issued a new code automatically. If
+			a receiver types an old code from a chat log or a code read out a while ago, ask the caster to
+			read out the current one on their screen. Repeated wrong attempts are also rate limited (20
+			per IP address every 5 minutes) to prevent guessing, so a string of failed attempts will
+			briefly lock out further tries — that's expected, not a bug.
+		</p>
+
+		<h2>No sound came through</h2>
+		<p>
+			Audio sharing is controlled entirely by the browser's own share picker, not by QuiiCast — when
+			you choose what to share, look for a checkbox like "share audio" or "share tab audio" and make
+			sure it's enabled before confirming. Chrome only offers this checkbox for tab-sharing or, on
+			some platforms, when sharing your entire screen; sharing a single application window
+			sometimes omits the option entirely, in which case sharing the whole screen or the browser tab
+			instead brings the checkbox back.
+		</p>
+
+		<h2>Browser and device support</h2>
+		<p>
+			This reflects the actual capabilities of the underlying Web APIs QuiiCast depends on, not a
+			claim about testing every device — the platform restrictions below are Apple's and Google's,
+			not QuiiCast's:
+		</p>
+		<ul>
+			<li><strong>Sending a share (casting):</strong> supported on desktop Chrome, Edge, and Firefox, and on Android Chrome. Not supported on any iOS browser (Safari, Chrome, or otherwise) — Apple doesn't implement screen-capture APIs for websites on iOS.</li>
+			<li><strong>Receiving a share:</strong> supported on every modern desktop and mobile browser, iOS included — watching a share never requires the capture API, only standard video playback.</li>
+			<li><strong>Smart TVs:</strong> works on any TV with a real, modern browser (Android TV/Google TV, LG webOS, Samsung Tizen). Roku does not include a general-purpose browser at all, so it can't load the receive page directly — see the <a href="/blog/screen-share-to-a-tv">TV casting guide</a> for the workarounds.</li>
+		</ul>
+
+		<h2>Still stuck?</h2>
+		<p>
+			Check the <a href="/security">Security &amp; Privacy</a> page for how the connection itself
+			works, the <a href="/how-it-works">how it works</a> page for the basic setup, or the full
+			<a href="/faq">FAQ</a> for other common questions.
+		</p>
+	</div>
+</BaseLayout>
