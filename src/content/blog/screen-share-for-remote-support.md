@@ -23,6 +23,8 @@ In all three cases, the value is the same: you see the exact error text, the exa
 
 To set one up: the person with the problem opens [quiicast.com/caster](/caster) and reads out the 4-digit code it generates; you open [quiicast.com/receiver](/receiver) and type it in. Full details on connecting, quality settings, and the local-WiFi option are on the [how it works](/how-it-works) page — the short version is that nothing needs installing on either side, and the code stops working once the session ends.
 
+![The real QuiiCast caster screen mid-session, showing the 4-digit code and viewer status](/blog/screenshot-caster-sharing.png)
+
 ## Safety rules worth taking seriously
 
 - Never share a screen showing a password field, a banking app, or a two-factor code being entered — pause sharing first if one of those needs to happen.
@@ -31,6 +33,8 @@ To set one up: the person with the problem opens [quiicast.com/caster](/caster) 
 - Sessions aren't recorded or stored anywhere, and each code is single-use per session, so there's nothing left over once the tab closes.
 
 ## When you need more than viewing
+
+![The receiving side connected and watching a live share](/blog/screenshot-receiver-watching.png)
 
 QuiiCast is deliberately view-only — there's no remote control, no keystroke access, nothing beyond video and (if you choose) audio. That's the right amount of access for triage, diagnosis, and walking someone through a fix verbally. It's the *wrong* tool when you genuinely need to take the wheel yourself: installing software on someone else's behalf, fixing a setting faster than you can talk them to it, or anything requiring elevated permissions on their machine. For that, a proper remote-control tool — TeamViewer, AnyDesk, or Chrome Remote Desktop — is the right call, with the tradeoff that all three require an install (or a Chrome extension) and, in TeamViewer and AnyDesk's case, usually an account. QuiiCast's advantage is exactly that it needs neither, which is why it's a better first step for "let me just see it" before deciding whether a heavier tool is actually warranted.
 

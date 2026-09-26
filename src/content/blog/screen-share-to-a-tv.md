@@ -13,6 +13,8 @@ Getting a laptop screen onto a bigger display shouldn't require finding the righ
 
 If the TV has its own web browser, this works the same way as sharing to any other device: open [quiicast.com/receiver](/receiver) on the TV, and type in the code shown on your laptop after starting a share from [quiicast.com/caster](/caster). Since you're in the same room, turn on **Prefer local WiFi** first — it keeps the video on your home network instead of routing it over the internet, which usually means lower latency. The two devices still need a brief moment of internet access to find each other; only the actual video traffic stays local.
 
+![The receive page open and ready for a code — this is what to load on the TV's browser](/blog/screenshot-receiver-idle.png)
+
 Whether this works at all depends entirely on the TV having a real browser:
 
 - **Android TV / Google TV** (Sony, TCL, Hisense, some Philips) ships with a Chrome-based browser, or one is installable from the Play Store.
@@ -35,6 +37,8 @@ If the real goal is "my laptop screen, on the TV connected to my Roku," the reli
 - **A smart TV with its own browser**, per the compatibility notes above.
 
 ## Watching something together when you're not in the same room
+
+![The TV connected and receiving the live feed](/blog/screenshot-receiver-watching.png)
 
 The other direction — sharing to someone who isn't physically near you at all — comes up constantly: a video too good to describe, a photo album from a trip, a browser tab with a listing you found. Sending a link works, but it strips out reacting together in real time. Whatever's on your screen, share it from [quiicast.com/caster](/caster) and send the code; the other person watches on [quiicast.com/receiver](/receiver) from their laptop, tablet, or phone, while you talk over a separate phone or video call. It's genuinely one-way — there's no synced playback control on their end, so it works best with a little narration ("okay, pausing here"). If either of you is on mobile data, dropping the quality preset a notch keeps things smooth without burning through a data plan.
 

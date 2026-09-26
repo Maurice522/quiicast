@@ -15,7 +15,11 @@ For a single focused session, signing both people up for a full e-learning platf
 
 A couple of things that help: use **Full screen** on the student's end so shared material fills their view without browser chrome around it, and if you're annotating live, a slightly lower frame-rate quality preset is usually indistinguishable for handwriting or text while being easier on a student's mobile connection.
 
+![A student's view once connected — live, with playback controls](/blog/screenshot-receiver-watching.png)
+
 ## Study groups
+
+![The tutor's actual sharing screen, showing the code to send the group](/blog/screenshot-caster-sharing.png)
 
 The same setup works for a group: whoever has the best notes, the clearest summary, or the practice set everyone needs shares their screen, and the code goes in the group chat. Up to 5 people can join at once — enough for most study groups — and because there's no account required, everyone can be watching within a minute of the code being sent. That matters for the sessions that come together spontaneously, like the night before an exam, when nobody wants to schedule anything formally.
 

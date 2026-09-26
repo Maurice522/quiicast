@@ -13,6 +13,8 @@ Two situations, same underlying need: one person's own environment, another pers
 
 Sometimes you don't need a scheduled call, a display name, and a camera prompt — you need a teammate to look at your terminal for ninety seconds and tell you why the build is failing. Open [quiicast.com/caster](/caster), start sharing your editor or terminal, and drop the 4-digit code in Slack. Your teammate opens [quiicast.com/receiver](/receiver), types it, and is looking at your screen within seconds. It's one-directional by default — you share, they watch, and talk over whatever chat or call tool you already use for audio. Up to 5 people can join the same code, so a quick pairing session can turn into an ad hoc mob-debugging session without restarting anything.
 
+![The real cast screen mid-session, with the code visible to send a teammate](/blog/screenshot-caster-sharing.png)
+
 This isn't a replacement for a proper pair-programming setup with shared control (an IDE's Live Share feature, or an SSH-based shared terminal) when you genuinely need both people typing in the same file. It's for the far more common case: one person driving, one person watching and advising, for a short focused stretch — debugging together, walking through a diff before opening a PR, or onboarding a new hire through your local dev setup on day one.
 
 ## Running a technical interview
@@ -22,6 +24,8 @@ Live-coding platforms are useful for a shared, sandboxed editor exercise. They'r
 The candidate opens [quiicast.com/caster](/caster), shares their screen, and gives you the code; you watch on [quiicast.com/receiver](/receiver) while they talk through their thinking. No interview platform to onboard them into, no plugin, no account setup eating into a 45-minute slot — and if you're interviewing with a co-interviewer, the same code supports both of you watching at once. A few things worth setting up beforehand: send the candidate the [caster link](/caster) a few minutes early so they aren't fumbling with a new tool once the call starts, confirm audio runs over your usual call tool since QuiiCast handles only the screen, and if the candidate's connection is slow, suggest a lower quality preset — a crisp 480p feed of a terminal is far more useful than a stuttering 4K one.
 
 ## When you actually need shared control
+
+![The receive page ready for a candidate or teammate to enter a code](/blog/screenshot-receiver-idle.png)
 
 Both of these scenarios stay one-directional — QuiiCast streams video only, and neither side can type into the other's machine. When the task genuinely needs two people editing the same file at once, an IDE's Live Share extension (or a shared SSH session over tmux) is the right tool, at the cost of both people needing that specific setup installed and configured beforehand. QuiiCast's advantage is exactly that neither side needs anything beyond a browser — which makes it a better fit for the far more common case of one person driving and another watching, especially when that's all a 45-minute interview slot has time for anyway.
 

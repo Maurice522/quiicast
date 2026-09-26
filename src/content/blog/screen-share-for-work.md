@@ -13,6 +13,8 @@ A lot of work happens between the meetings that are actually on the calendar. So
 
 Some demos are scheduled a week out with a deck. Others happen because a prospect asked to see the thing you're describing mid-conversation, and the moment usually passes if you make them wait for a meeting link to spin up. Share your screen from [quiicast.com/caster](/caster), send the 4-digit code over whatever channel you're already talking in, and the prospect is watching within seconds on any device — no account, no app to install. This is deliberately not built for a formal, recorded, multi-stakeholder pitch; for that, a real video-conferencing tool is still the right choice.
 
+![The QuiiCast cast page before sharing, with the local-WiFi toggle and quality selector](/blog/screenshot-caster-idle.png)
+
 ## Walking someone through a document
 
 Sending a document link works when the other person just needs to read or edit it on their own time. It's a worse fit when you need to explain *why* a formula is built a certain way before they touch it, or the document is sensitive enough that you don't want to grant edit access at all — sharing the screen shows exactly what's there, cursor and comments included, without a shared-drive invite or an account on whatever platform the file lives in.
@@ -24,6 +26,8 @@ Giving a client staging credentials or a shared design-tool seat is reasonable f
 ## Presenting to a small room
 
 Not every presentation happens in a room with a projector already wired up. Four people around a desk, or a small team in a coworking space, can each open [quiicast.com/receiver](/receiver) on their own laptop or phone and follow along on their own screen — up to 5 devices per code — which is often faster than finding the right HDMI adapter. If a couple of attendees are remote, they join with the same code from wherever they are.
+
+![The actual live session view — code, viewer count, and stop control](/blog/screenshot-caster-sharing.png)
 
 Setup for all of the above is the same three steps, covered in full on the [how it works](/how-it-works) page: start a cast, share the code, everyone connects from the receive page.
 

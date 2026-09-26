@@ -13,6 +13,8 @@ A written comment on a resume tells you *what* someone thinks. Watching their re
 
 Sending a PDF or a portfolio link and waiting for comments back is convenient, but it strips out the in-the-moment reactions that are often the most useful part of a review: the confused pause on a vague bullet point, the "wait, go back" on a project they want to hear more about, the moment their eyes glaze over on a paragraph that's clearly too dense. Open your resume or portfolio from [quiicast.com/caster](/caster), send your mentor or career coach the code, and they watch on [quiicast.com/receiver](/receiver) while you scroll and narrate, pausing on the sections that need work instead of guessing which ones from a list of written notes afterward. Setup is the same as any QuiiCast session — see the [how it works](/how-it-works) page — and it works in the other direction too, if a mentor wants to show *their* resume as a reference for what "good" looks like in your field.
 
+![The receive page, ready for a mentor to enter the code and start watching](/blog/screenshot-receiver-idle.png)
+
 ## Good moments for this
 
 - A mock interview where the interviewer reviews your resume live before questions start
@@ -23,6 +25,8 @@ Sending a PDF or a portfolio link and waiting for comments back is convenient, b
 Ask whoever's reviewing to think out loud as they go, not just summarize at the end — the "wait, what does this mean" reaction in the middle of reading a bullet point is far more useful than a polished summary five minutes later, because it's their unfiltered first impression.
 
 ## Why not just use commenting in the doc itself?
+
+![The real cast screen mid-session, showing the code to send a mentor](/blog/screenshot-caster-sharing.png)
 
 Google Docs or PDF comments are genuinely better for detailed, line-by-line notes you want to revisit later — they're persistent, and you can act on them at your own pace. A live screen share is better for capturing immediate reactions and asking follow-up questions on the spot, which written comments can't do. Many people get more out of doing both, in that order: a live pass first to catch the big reactions, then written comments for the detail work afterward.
 
