@@ -1,6 +1,8 @@
 ---
 title: "Screen Sharing for Remote Support: Family, IT Helpdesk, and Bug Reports"
 description: "When looking at someone's screen beats describing it: helping a family member, triaging an IT ticket, or reporting a bug — and when you need real remote control instead."
+seoTitle: "Remote Support by Screen Share: Family, IT & Bugs"
+seoDescription: "Help a parent, triage an IT ticket, or show a bug by screen share with nothing to install — and when you need real remote control instead."
 publishDate: 2026-09-25
 updatedDate: 2026-09-26
 image: "/blog/remote-tech-support-for-family.svg"

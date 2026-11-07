@@ -1,6 +1,8 @@
 ---
 title: "Getting Real-Time Feedback on a Portfolio or Resume"
 description: "Scrolling through your own work with a mentor watching and reacting, instead of trading PDF comments."
+seoTitle: "Live Portfolio & Resume Feedback by Screen Share"
+seoDescription: "Scroll through your resume or portfolio while a mentor reacts in real time — and when written comments are the better tool."
 publishDate: 2026-08-05
 updatedDate: 2026-09-26
 image: "/blog/portfolio-and-resume-reviews.svg"

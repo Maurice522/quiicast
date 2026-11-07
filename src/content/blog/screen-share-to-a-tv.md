@@ -1,6 +1,8 @@
 ---
 title: "Screen Sharing to a TV: Same-WiFi Casting, the Roku Exception, and Watching Together Remotely"
 description: "Getting a laptop screen onto a bigger display, the honest reason Roku can't do it directly, and watching something with someone who isn't in the room — including when AirPlay or Chromecast is just the better choice."
+seoTitle: "Screen Share to a TV Browser: Same WiFi or Remote"
+seoDescription: "Cast a laptop to a smart TV's browser over WiFi: which TVs work (Android TV, LG, Samsung), the Roku limit, and when AirPlay or Chromecast wins."
 publishDate: 2026-09-25
 updatedDate: 2026-09-26
 image: "/blog/casting-to-a-tv-on-same-wifi.svg"
@@ -22,20 +24,11 @@ Whether this works at all depends entirely on the TV having a real browser:
 - **LG webOS** and **Samsung Tizen** TVs both include a browser, usually tucked under a "Web Browser" app rather than on the home screen.
 - **Fire TV** has Silk Browser available, but it isn't preinstalled on every model.
 - **Older "smart" TVs** from the early 2010s often technically have a browser too outdated to render a modern page reliably.
-- **Roku** — no general-purpose browser at all, covered in detail below.
+- **Roku** — no general-purpose browser at all; see [the Roku section below](#the-roku-exception).
 
 ## The Roku exception
 
-If you're specifically searching for how to screen cast to Roku, here's the honest answer up front: you can't open a receive page directly on one, because Roku's operating system doesn't include a general-purpose web browser. This applies across the whole lineup — the cheapest Express stick, the higher-end Ultra, and Roku-branded TVs from TCL, Hisense, and others all share the same core OS and the same limitation. There's no address bar, no hidden developer mode, and no way to navigate to any website on stock Roku hardware. Any screen-sharing tool that depends on a receiving browser — QuiiCast included — hits the same wall.
-
-Roku does have its own answer to "get my laptop on the TV," just not through a browser: **screen mirroring**, based on Miracast, which lets some Windows and Android devices mirror their display to a Roku over WiFi directly. It's a different technology entirely — no browser, no code, an OS-level mirroring protocol instead. Miracast isn't supported on iPhone or iPad at all, since Apple uses AirPlay instead, which most Roku devices don't support (a handful of newer Roku models have added limited AirPlay compatibility — check your specific model). To try Miracast from Windows: open the **Action Center** (or press Windows key + K), select **Cast**, and choose your Roku from the list.
-
-If the real goal is "my laptop screen, on the TV connected to my Roku," the reliable fallbacks are:
-
-- **An HDMI cable**, which bypasses Roku's OS entirely — the TV just displays whatever the laptop sends.
-- **Miracast**, for Windows or Android sources, as above.
-- **A different receiving screen** — a tablet, a second laptop, a phone — where [QuiiCast works normally](/receiver), Roku or not.
-- **A smart TV with its own browser**, per the compatibility notes above.
+Roku is the one big platform where this doesn't work: its operating system has no general-purpose browser, so there's nowhere to open the receive page, on any model. Roku's own answers are Miracast mirroring from Windows and Android, AirPlay on some newer models, and app-level casting. Our separate guide on [how to screen cast to Roku](/blog/how-to-screen-cast-to-roku) walks through each source device and the Roku settings to check. An HDMI cable or a browser-capable second screen remains the dependable fallback.
 
 ## Watching something together when you're not in the same room
 
@@ -52,7 +45,5 @@ If your devices already support native casting and it's already set up, use it �
 **Will there be lag casting to a TV?** On the same WiFi with "Prefer local WiFi" on, latency is typically low enough to stay in sync with narration. A congested home network can still add delay.
 
 **Does audio come through the TV speakers?** Yes, if you choose to share audio in your browser's picker — it plays through whatever device is receiving the stream.
-
-**Will Roku ever add browser support?** There's no indication of it — Roku's whole design is a locked-down, channel-based interface, which is part of why it stays simple and cheap.
 
 Full connection setup — starting a cast, sharing the code, quality settings — is on the [how it works](/how-it-works) page.

@@ -1,21 +1,42 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'QuiiCast',
-  url: 'https://quiicast.com',
-  applicationCategory: 'CommunicationApplication',
-  operatingSystem: 'Any',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD'
-  },
-  description:
-    'QuiiCast is a free screen share app for quick casting your screen to another device — no account, no download, just a 4-digit code.'
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://quiicast.com/#website',
+      url: 'https://quiicast.com/',
+      name: 'QuiiCast',
+      description: 'Free browser-based screen sharing with a 4-digit code.',
+      publisher: { '@id': 'https://quiicast.com/#organization' }
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://quiicast.com/#organization',
+      name: 'QuiiCast',
+      url: 'https://quiicast.com/',
+      logo: 'https://quiicast.com/android-chrome-512x512.png'
+    },
+    {
+      '@type': 'WebApplication',
+      name: 'QuiiCast',
+      url: 'https://quiicast.com/',
+      applicationCategory: 'CommunicationApplication',
+      operatingSystem: 'Any',
+      browserRequirements: 'Requires a modern web browser with WebRTC support',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description:
+        'QuiiCast is a free screen share app for quick casting your screen to another device — no account, no download, just a 4-digit code.'
+    }
+  ]
 };
+
+const guides = (await getCollection('blog')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
 ---
 
 <BaseLayout
@@ -106,7 +127,7 @@ const jsonLd = {
 
 		<h2>Screen share on iPhone, Android, and any browser</h2>
 		<p>
-			QuiiCast works across devices without a native app to install. On Android, you can both cast
+			QuiiCast works across devices without a native app to install. For the full picture, see our guide to <a href="/blog/screen-share-on-iphone">screen sharing on iPhone</a>. On Android, you can both cast
 			and receive a screen share directly from Chrome or any modern mobile browser. On iPhone,
 			Apple's own platform restrictions mean Safari can't capture the screen to cast it out —
 			that's a limitation of iOS itself, not QuiiCast — but an iPhone can receive a screen share
@@ -129,7 +150,7 @@ const jsonLd = {
 			Devices like Roku are a different case worth knowing about: Roku's operating system doesn't
 			include a general-purpose web browser, so there's no way to open a receive page directly on
 			a Roku itself. If you're specifically trying to
-			<a href="/blog/screen-share-to-a-tv">screen cast to Roku</a>, a smart TV with its own
+			<a href="/blog/how-to-screen-cast-to-roku">screen cast to Roku</a>, a smart TV with its own
 			browser — or a laptop connected to the TV by cable — will get you further than trying to
 			load a website directly on the Roku.
 		</p>
@@ -143,5 +164,19 @@ const jsonLd = {
 			QuiiCast is built specifically for that instant, live case — screen sharing, not screen
 			recording.
 		</p>
+	</section>
+
+	<section class="mx-auto mt-20 max-w-3xl" aria-labelledby="guides-heading">
+		<h2 id="guides-heading" class="text-center text-2xl font-bold text-slate-900 dark:text-white">Screen sharing guides</h2>
+		<ul class="mt-8 grid gap-3 sm:grid-cols-2">
+			{guides.map((g) => (
+				<li>
+					<a href={`/blog/${g.id}`} class="glass-card block h-full p-4 transition-transform hover:-translate-y-0.5">
+						<span class="block text-sm font-semibold text-slate-900 dark:text-white">{g.data.seoTitle ?? g.data.title}</span>
+						<span class="mt-1 block text-xs text-slate-600 dark:text-slate-400">{g.data.seoDescription ?? g.data.description}</span>
+					</a>
+				</li>
+			))}
+		</ul>
 	</section>
 </BaseLayout>

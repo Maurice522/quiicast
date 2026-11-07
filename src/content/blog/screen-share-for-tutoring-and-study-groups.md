@@ -1,6 +1,8 @@
 ---
 title: "Screen Sharing for Tutoring and Study Groups"
 description: "A tutor showing one student a worked problem, or a study group looking at the same notes the night before an exam — without either side signing up for classroom software."
+seoTitle: "Screen Sharing for Tutoring & Study Groups"
+seoDescription: "Share notes, slides or practice problems with a student or study group — no accounts or classroom software, works on phones and Chromebooks."
 publishDate: 2026-09-25
 updatedDate: 2026-09-26
 image: "/blog/live-tutoring-and-online-classes.svg"

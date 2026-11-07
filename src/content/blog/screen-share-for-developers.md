@@ -1,6 +1,8 @@
 ---
 title: "Screen Sharing for Developers: Pairing and Technical Interviews"
 description: "A lighter way to pair on a bug than opening a full call, and a way to watch a candidate work in their own editor instead of a stripped-down browser sandbox."
+seoTitle: "Screen Sharing for Pair Programming & Interviews"
+seoDescription: "Pair on a bug without a full call, or watch a candidate work in their own editor — and when Live Share or a coding sandbox is the better fit."
 publishDate: 2026-09-25
 updatedDate: 2026-09-26
 image: "/blog/pair-programming-screen-share.svg"

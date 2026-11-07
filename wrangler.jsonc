@@ -8,6 +8,10 @@
 	"workers_dev": false,
 	"assets": {
 		"directory": "./dist",
-		"not_found_handling": "404-page"
+		"not_found_handling": "404-page",
+		// Canonical URLs and the sitemap use no trailing slash; serve those
+		// directly (200) and 301 the slash variant to them, instead of the
+		// default 307 from no-slash to slash that contradicted the canonicals.
+		"html_handling": "drop-trailing-slash"
 	}
 }

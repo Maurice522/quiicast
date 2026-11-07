@@ -1,6 +1,8 @@
 ---
 title: "Showing a Friend How to Beat a Level, Live"
 description: "For the games where a video walkthrough isn't as useful as someone actually watching you try, right now."
+seoTitle: "Show a Friend a Game Level Live by Screen Share"
+seoDescription: "Let a friend watch your boss fight live with no streaming account or OBS — and how it compares with Discord screen share."
 publishDate: 2026-08-06
 updatedDate: 2026-09-26
 image: "/blog/gaming-walkthroughs-with-friends.svg"

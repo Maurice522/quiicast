@@ -17,7 +17,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-	title="Screen Share FAQ — iPhone, TV, Roku, Zoom & More | QuiiCast"
+	title="Screen Share FAQ: iPhone, TV, Roku, Zoom | QuiiCast"
 	description="Common screen sharing questions answered: iPhone, Android, TV, Roku, FaceTime, Zoom, Teams, Google Meet, Discord, and more."
 	path="/faq"
 	jsonLd={jsonLd}
@@ -47,9 +47,16 @@ const jsonLd = {
 						<path d="m6 9 6 6 6-6" />
 					</svg>
 				</summary>
-				<p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+				<p class="px-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
 					{faq.answer}
 				</p>
+				{faq.guide ? (
+					<p class="px-5 pb-5 pt-2 text-sm">
+						<a href={faq.guide.href} class="font-medium text-brand-600 underline underline-offset-4 hover:text-brand-500 dark:text-brand-300">{faq.guide.label} →</a>
+					</p>
+				) : (
+					<div class="pb-5"></div>
+				)}
 			</details>
 		))}
 	</div>

@@ -1,6 +1,8 @@
 ---
 title: "Screen Sharing at Work: Demos, Documents, Client Updates, and Small Rooms"
 description: "For the work conversations that happen between meetings — a quick demo, a document walkthrough, a client check-in, a small-room presentation — and when a real video call is still the better call."
+seoTitle: "Screen Sharing at Work: Demos, Docs & Client Updates"
+seoDescription: "Quick demos, document walkthroughs, client check-ins and small-room presentations without scheduling a call — and when Zoom is the better tool."
 publishDate: 2026-09-25
 updatedDate: 2026-09-26
 image: "/blog/freelancer-client-screen-share.svg"
