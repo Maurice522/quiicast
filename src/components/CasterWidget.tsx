@@ -58,6 +58,7 @@ export default function CasterWidget() {
   const [receiverCount, setReceiverCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const [slowConnection, setSlowConnection] = useState(false);
   const [permissionBlocked, setPermissionBlocked] = useState(false);
 
@@ -277,6 +278,16 @@ export default function CasterWidget() {
     });
   }
 
+  function copyInviteLink() {
+    // Links carry the code so the viewer lands on the receive page with it
+    // pre-filled — one tap to connect, and no need to know the site address.
+    const url = `${window.location.origin}/receiver?code=${otp}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 1500);
+    });
+  }
+
   return (
     <div className="glass-card p-5 sm:p-8">
       {status === 'idle' && (
@@ -378,6 +389,10 @@ export default function CasterWidget() {
           <p className="mt-1 text-xs text-slate-500">
             {copied ? 'Copied!' : `Expires in ${expiresInMinutes} min · up to ${maxReceivers} viewers`}
           </p>
+
+          <button onClick={copyInviteLink} className="btn-secondary mt-3 text-sm">
+            {linkCopied ? 'Link copied!' : 'Copy invite link'}
+          </button>
 
           <span
             className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium ${

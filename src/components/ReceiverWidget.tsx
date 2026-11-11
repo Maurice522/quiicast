@@ -49,6 +49,13 @@ export default function ReceiverWidget() {
 
   useEffect(() => () => cleanup(), [cleanup]);
 
+  // Invite links look like /receiver?code=1234 — pre-fill the code (never
+  // auto-connect, so link-preview bots and stray clicks can't burn an attempt).
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code && /^\d{4}$/.test(code)) setOtpInput(code);
+  }, []);
+
   // The <video> element only mounts once status flips to 'watching', which
   // happens in the same tick as ontrack — so videoRef.current is still null
   // at that point. Attach the stream here instead, once the element exists.
